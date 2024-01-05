@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+  <script>
+    async function fetchdata() {
+      url = "http://localhost:8080/image/personal.jpg";
+      const response = await fetch(url);
+      await console.log(response.text());
+    }
+  </script>
+</head>
+
+<body>
+  <button onClick="fetchdata();">Fetch Image</button>
+</body>
+
+</html>
