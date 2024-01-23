@@ -1,8 +1,8 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.domain.{Url, Urls}
-import rockthejvm.loadbalancer.domain.UrlsRef._
 import cats.effect.IO
+import rockthejvm.loadbalancer.domain.UrlsRef._
+import rockthejvm.loadbalancer.domain.{Url, Urls}
 
 class RoundRobinTest extends munit.CatsEffectSuite {
 

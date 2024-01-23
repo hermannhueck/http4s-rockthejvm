@@ -1,9 +1,9 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.http.{HttpClient, ServerHealthStatus}
 import cats.effect.IO
-import org.http4s.{Request, Uri}
 import munit.CatsEffectSuite
+import org.http4s.{Request, Uri}
+import rockthejvm.loadbalancer.http.{HttpClient, ServerHealthStatus}
 
 class SendAndExpectTest extends CatsEffectSuite {
 

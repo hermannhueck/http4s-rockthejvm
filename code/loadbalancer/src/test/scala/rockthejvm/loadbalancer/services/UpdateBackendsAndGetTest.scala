@@ -1,10 +1,10 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.domain.{Url, Urls}
-import rockthejvm.loadbalancer.domain.UrlsRef.Backends
-import rockthejvm.loadbalancer.http.ServerHealthStatus
 import cats.effect.IO
 import munit.CatsEffectSuite
+import rockthejvm.loadbalancer.domain.UrlsRef.Backends
+import rockthejvm.loadbalancer.domain.{Url, Urls}
+import rockthejvm.loadbalancer.http.ServerHealthStatus
 
 class UpdateBackendsAndGetTest extends CatsEffectSuite {
 

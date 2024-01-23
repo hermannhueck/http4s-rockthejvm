@@ -1,10 +1,10 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.domain._
-import rockthejvm.loadbalancer.domain.UrlsRef.Backends
-import rockthejvm.loadbalancer.http.HttpClient
-import org.http4s._
 import cats.effect._
+import org.http4s._
+import rockthejvm.loadbalancer.domain.UrlsRef.Backends
+import rockthejvm.loadbalancer.domain._
+import rockthejvm.loadbalancer.http.HttpClient
 
 class LoadBalancerTest extends munit.CatsEffectSuite {
 

@@ -1,8 +1,8 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.errors.parsing.InvalidUri
-import org.http4s.Uri
 import cats.syntax.either._
+import org.http4s.Uri
+import rockthejvm.loadbalancer.errors.parsing.InvalidUri
 
 class ParseUriTest extends munit.FunSuite {
 

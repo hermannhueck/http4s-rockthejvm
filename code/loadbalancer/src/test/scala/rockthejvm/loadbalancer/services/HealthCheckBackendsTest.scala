@@ -1,9 +1,9 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.domain._
-import rockthejvm.loadbalancer.domain.UrlsRef._
-import rockthejvm.loadbalancer.http.HttpClient
 import cats.effect._
+import rockthejvm.loadbalancer.domain.UrlsRef._
+import rockthejvm.loadbalancer.domain._
+import rockthejvm.loadbalancer.http.HttpClient
 
 class HealthCheckBackendsTest extends munit.CatsEffectSuite {
 
