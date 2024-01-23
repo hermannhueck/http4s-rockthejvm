@@ -1,11 +1,5 @@
 package rockthejvm.loadbalancer
 
-import rockthejvm.loadbalancer.domain.UrlsRef._
-import rockthejvm.loadbalancer.domain._
-import rockthejvm.loadbalancer.errors.config.InvalidConfig
-import rockthejvm.loadbalancer.http.HttpServer
-import rockthejvm.loadbalancer.services.{ParseUri, RoundRobin, UpdateBackendsAndGet}
-
 import cats.effect._
 import cats.syntax.apply._
 import com.comcast.ip4s.{Host, Port}
@@ -13,6 +7,11 @@ import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 import org.typelevel.log4cats.syntax._
 import pureconfig.ConfigSource
+import rockthejvm.loadbalancer.domain.UrlsRef._
+import rockthejvm.loadbalancer.domain._
+import rockthejvm.loadbalancer.errors.config.InvalidConfig
+import rockthejvm.loadbalancer.http.HttpServer
+import rockthejvm.loadbalancer.services.{ParseUri, RoundRobin, UpdateBackendsAndGet}
 
 object Main extends IOApp.Simple {
 

@@ -1,26 +1,21 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.http.{HttpClient, ServerHealthStatus}
+import scala.concurrent.duration.DurationInt
 
-import org.http4s.client.UnexpectedStatus
-import org.http4s.{Request, Uri}
-import org.http4s.EntityDecoder
-
-import cats.effect.{Async, Sync}
 import cats.effect.implicits._
-
+import cats.effect.{Async, Sync}
+import cats.syntax.applicative._
+import cats.syntax.applicativeError._
+import cats.syntax.apply._
+import cats.syntax.flatMap._
+import cats.syntax.functor._
+import cats.syntax.option._
+import org.http4s.client.UnexpectedStatus
+import org.http4s.{EntityDecoder, Request, Uri}
 import org.typelevel.log4cats.Logger
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 import org.typelevel.log4cats.syntax._
-
-import cats.syntax.option._
-import cats.syntax.applicative._
-import cats.syntax.apply._
-import cats.syntax.functor._
-import cats.syntax.flatMap._
-import cats.syntax.applicativeError._
-
-import scala.concurrent.duration.DurationInt
+import rockthejvm.loadbalancer.http.{HttpClient, ServerHealthStatus}
 
 trait SendAndExpect[F[_], A] {
   def apply(uri: Uri)(implicit

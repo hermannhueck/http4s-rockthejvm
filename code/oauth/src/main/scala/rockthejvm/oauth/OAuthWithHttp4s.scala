@@ -16,25 +16,26 @@
 
 package rockthejvm.oauth
 
-import io.circe._
-import io.circe.parser._
-import ciris._
-import ciris.circe._
 import java.nio.file.Paths
-import org.http4s._
-import org.http4s.dsl.io._
-import org.http4s.dsl._
-import org.http4s.implicits._
+
+import cats.data.OptionT
 import cats.effect._
 import cats.implicits._
+import ciris._
+import ciris.circe._
 import com.comcast.ip4s._
-import org.http4s.ember.server.EmberServerBuilder
-import org.http4s.ember.client.EmberClientBuilder
-import org.http4s.headers.{Accept, Authorization}
-import cats.data.OptionT
-import org.http4s.client.Client
-import fs2.io.net.Network
 import fs2.io.file.Files
+import fs2.io.net.Network
+import io.circe._
+import io.circe.parser._
+import org.http4s._
+import org.http4s.client.Client
+import org.http4s.dsl._
+import org.http4s.dsl.io._
+import org.http4s.ember.client.EmberClientBuilder
+import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.headers.{Accept, Authorization}
+import org.http4s.implicits._
 
 final case class AppConfig(key: String, secret: Secret[String])
 object AppConfig {

@@ -1,7 +1,17 @@
 package rockthejvm.loadbalancer.http
 
-import rockthejvm.loadbalancer.domain._
+import cats.effect.syntax.resource._
+import cats.effect.{Async, Resource}
+import com.comcast.ip4s._
+import fs2.io.net.Network
+import org.http4s._
+import org.http4s.client.Client
+import org.http4s.ember.client.EmberClientBuilder
+import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.server.Server
+import org.http4s.server.middleware.Logger
 import rockthejvm.loadbalancer.domain.UrlsRef.{Backends, HealthChecks}
+import rockthejvm.loadbalancer.domain._
 import rockthejvm.loadbalancer.services.RoundRobin.{BackendsRoundRobin, HealthChecksRoundRobin}
 import rockthejvm.loadbalancer.services.{
   AddRequestPathToBackendUrl,
@@ -11,18 +21,6 @@ import rockthejvm.loadbalancer.services.{
   SendAndExpect,
   UpdateBackendsAndGet
 }
-
-import org.http4s._
-import org.http4s.ember.client.EmberClientBuilder
-import org.http4s.ember.server.EmberServerBuilder
-import org.http4s.server.middleware.Logger
-import org.http4s.client.Client
-import org.http4s.server.Server
-
-import com.comcast.ip4s._
-import cats.effect.{Async, Resource}
-import cats.effect.syntax.resource._
-import fs2.io.net.Network
 
 object HttpServer {
 

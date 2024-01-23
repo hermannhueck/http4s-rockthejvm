@@ -1,14 +1,14 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.domain._
-import rockthejvm.loadbalancer.domain.UrlsRef._
-import rockthejvm.loadbalancer.services.RoundRobin.BackendsRoundRobin
-import org.http4s.dsl.Http4sDsl
-import org.http4s._
-import cats.effect._
 import cats._
-import cats.syntax.functor._
+import cats.effect._
 import cats.syntax.flatMap._
+import cats.syntax.functor._
+import org.http4s._
+import org.http4s.dsl.Http4sDsl
+import rockthejvm.loadbalancer.domain.UrlsRef._
+import rockthejvm.loadbalancer.domain._
+import rockthejvm.loadbalancer.services.RoundRobin.BackendsRoundRobin
 
 object LoadBalancer {
 

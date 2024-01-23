@@ -1,10 +1,10 @@
 package rockthejvm.loadbalancer.services
 
-import cats._
-import rockthejvm.loadbalancer.domain.{Url, Urls, UrlsRef}
-import cats.syntax.functor._
-
 import scala.util.Try
+
+import cats._
+import cats.syntax.functor._
+import rockthejvm.loadbalancer.domain.{Url, Urls, UrlsRef}
 
 trait RoundRobin[F[_], G[_]] {
   def apply(ref: UrlsRef[F]): F[G[Url]]

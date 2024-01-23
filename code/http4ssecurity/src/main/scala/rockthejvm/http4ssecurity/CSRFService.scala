@@ -10,17 +10,18 @@
 
 package rockthejvm.http4ssecurity
 
-import cats._
-import cats.syntax.functor._
-import cats.effect._
-import org.http4s._
-import org.http4s.ember.server.EmberServerBuilder
-import com.comcast.ip4s._
-import org.http4s.server.middleware.CSRF
 import javax.crypto.SecretKey
-import org.http4s.server.Server
-import org.http4s.dsl.Http4sDsl
+
+import cats._
+import cats.effect._
+import cats.syntax.functor._
+import com.comcast.ip4s._
 import fs2.io.net.Network
+import org.http4s._
+import org.http4s.dsl.Http4sDsl
+import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.server.Server
+import org.http4s.server.middleware.CSRF
 
 object CSRFService extends IOApp.Simple {
 

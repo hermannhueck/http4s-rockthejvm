@@ -8,10 +8,10 @@
 package rockthejvm.marksu_client
 
 import cats.effect._
-import org.http4s.client.Client
-import org.http4s._
-import org.http4s.implicits._
 import fs2.io.net.Network
+import org.http4s._
+import org.http4s.client.Client
+import org.http4s.implicits._
 
 object GetHtmlCode extends IOApp.Simple {
 

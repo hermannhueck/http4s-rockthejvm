@@ -30,14 +30,14 @@ package rockthejvm.http4ssecurity
 
 import cats._
 import cats.effect._
+import com.comcast.ip4s._
+import fs2.io.net.Network
 import org.http4s._
 import org.http4s.dsl.Http4sDsl
 import org.http4s.ember.server.EmberServerBuilder
-import com.comcast.ip4s._
-import org.http4s.server.middleware.CORS
 import org.http4s.headers.Origin
 import org.http4s.server.Server
-import fs2.io.net.Network
+import org.http4s.server.middleware.CORS
 
 object CORSService extends IOApp.Simple {
 

@@ -16,12 +16,12 @@
 
 package rockthejvm.twofactorauth
 
-import org.http4s._
-import org.http4s.dsl.io._
-import org.http4s.implicits._
 import cats.effect._
 import com.comcast.ip4s._
+import org.http4s._
+import org.http4s.dsl.io._
 import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.implicits._
 import org.http4s.server.Server
 import org.typelevel.log4cats.slf4j.Slf4jLogger
 

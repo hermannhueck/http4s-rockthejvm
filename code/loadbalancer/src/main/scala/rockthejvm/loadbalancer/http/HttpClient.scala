@@ -1,8 +1,7 @@
 package rockthejvm.loadbalancer.http
 
-import org.http4s.client.Client // UnexpectedStatus
-import org.http4s.{Request, Uri}
-import org.http4s.EntityDecoder
+import org.http4s.client.Client
+import org.http4s.{EntityDecoder, Request, Uri}
 
 // import scala.concurrent.duration.DurationInt
 

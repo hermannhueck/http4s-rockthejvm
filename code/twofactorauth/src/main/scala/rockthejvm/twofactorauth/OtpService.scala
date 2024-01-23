@@ -1,9 +1,10 @@
 package rockthejvm.twofactorauth
 
-import rockthejvm.twofactorauth.Generator._
-import com.bastiaanjansen.otp._
 import java.time.Duration
+
 import cats.effect.IO
+import com.bastiaanjansen.otp._
+import rockthejvm.twofactorauth.Generator._
 
 class OtpService(generator: Generator, user: UserDB) {
 

@@ -1,17 +1,16 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.domain._
-import rockthejvm.loadbalancer.domain.UrlsRef._
-import rockthejvm.loadbalancer.http.ServerHealthStatus
-import rockthejvm.loadbalancer.services.RoundRobin.HealthChecksRoundRobin
+import scala.concurrent.duration.DurationLong
 
 import cats.effect._
-import scala.concurrent.duration.DurationLong
-import cats.Id
-import cats.MonadThrow
-import cats.syntax.functor._
 import cats.syntax.flatMap._
+import cats.syntax.functor._
+import cats.{Id, MonadThrow}
 import org.http4s.Uri
+import rockthejvm.loadbalancer.domain.UrlsRef._
+import rockthejvm.loadbalancer.domain._
+import rockthejvm.loadbalancer.http.ServerHealthStatus
+import rockthejvm.loadbalancer.services.RoundRobin.HealthChecksRoundRobin
 
 object HealthCheckBackends {
 

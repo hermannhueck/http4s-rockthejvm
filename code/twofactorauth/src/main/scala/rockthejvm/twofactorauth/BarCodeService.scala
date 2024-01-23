@@ -1,12 +1,12 @@
 package rockthejvm.twofactorauth
 
-import rockthejvm.twofactorauth.Generator._
-import com.google.zxing.common.BitMatrix
-import com.google.zxing.MultiFormatWriter
-import com.google.zxing.BarcodeFormat
 import java.io.FileOutputStream
-import com.google.zxing.client.j2se.MatrixToImageWriter
+
 import cats.effect.IO
+import com.google.zxing.client.j2se.MatrixToImageWriter
+import com.google.zxing.common.BitMatrix
+import com.google.zxing.{BarcodeFormat, MultiFormatWriter}
+import rockthejvm.twofactorauth.Generator._
 
 object BarCodeService {
   def getGoogleAuthenticatorBarCode(

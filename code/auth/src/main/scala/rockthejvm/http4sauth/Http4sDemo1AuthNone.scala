@@ -6,14 +6,14 @@
 
 package rockthejvm.http4sauth
 
+import cats._
 import cats.effect._
-import org.http4s._
-import org.http4s.server._
-import org.http4s.ember.server.EmberServerBuilder
 import com.comcast.ip4s._
 import fs2.io.net.Network
+import org.http4s._
 import org.http4s.dsl.Http4sDsl
-import cats._
+import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.server._
 
 object Http4sDemo1AuthNone extends IOApp.Simple {
 

@@ -6,21 +6,22 @@
 
 package rockthejvm.http4sauth
 
-import cats.effect._
-import org.http4s._
-import org.http4s.server._
-import org.http4s.ember.server._
-import com.comcast.ip4s._
-import fs2.io.net.Network
-import org.http4s.dsl.Http4sDsl
-import org.http4s.headers.Cookie
+import java.nio.charset.StandardCharsets
+import java.time.LocalTime
+import java.util.Base64
+
 import cats._
 import cats.data._
+import cats.effect._
 import cats.syntax.all._
+import com.comcast.ip4s._
+import fs2.io.net.Network
+import org.http4s._
+import org.http4s.dsl.Http4sDsl
+import org.http4s.ember.server._
+import org.http4s.headers.Cookie
+import org.http4s.server._
 import org.http4s.server.middleware.authentication.DigestAuth
-import java.nio.charset.StandardCharsets
-import java.util.Base64
-import java.time.LocalTime
 
 object Http4sDemo4AuthSessions extends IOApp.Simple {
 

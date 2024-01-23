@@ -6,22 +6,23 @@
 
 package rockthejvm.http4sauth
 
-import cats.effect._
-import org.http4s._
-import org.http4s.server._
-import org.http4s.ember.server._
-import com.comcast.ip4s._
-import fs2.io.net.Network
-import org.http4s.dsl.Http4sDsl
-import cats._
-import cats.syntax.all._
-import org.http4s.server.middleware.authentication.DigestAuth
 import java.time.Instant
-import pdi.jwt._
+
+import cats._
+import cats.effect._
+import cats.syntax.all._
+import com.comcast.ip4s._
+import dev.profunktor.auth.JwtAuthMiddleware
 import dev.profunktor.auth.jwt._
+import fs2.io.net.Network
 import io.circe._
 import io.circe.parser._
-import dev.profunktor.auth.JwtAuthMiddleware
+import org.http4s._
+import org.http4s.dsl.Http4sDsl
+import org.http4s.ember.server._
+import org.http4s.server._
+import org.http4s.server.middleware.authentication.DigestAuth
+import pdi.jwt._
 
 object Http4sDemo5AuthJWT extends IOApp.Simple {
 

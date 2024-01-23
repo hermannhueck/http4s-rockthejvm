@@ -1,9 +1,8 @@
 package rockthejvm.loadbalancer.domain
 
-import rockthejvm.loadbalancer.domain.Url
 import pureconfig.ConfigReader
-// import pureconfig.generic.derivation.default._ // for Scala 3 derivation
 import pureconfig.generic.semiauto._
+import rockthejvm.loadbalancer.domain.Url
 
 final case class Config(
     port: Int,

@@ -1,12 +1,14 @@
 package rockthejvm.twofactorauth
 
+import java.nio.file.{Files, Paths}
+import java.util.Base64
+
+import scala.util._
+
 import cats.effect.IO
 import com.sendgrid._
-import com.sendgrid.helpers.mail.objects.{Attachments, Content, Email}
 import com.sendgrid.helpers.mail.Mail
-import java.util.Base64
-import java.nio.file.{Files, Paths}
-import scala.util._
+import com.sendgrid.helpers.mail.objects.{Attachments, Content, Email}
 
 class OtpInteractiveService(generator: Generator, user: UserDB) {
   def otpService = new OtpService(generator, user)

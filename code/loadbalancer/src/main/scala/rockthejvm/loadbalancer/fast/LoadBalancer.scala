@@ -5,19 +5,19 @@
 package rockthejvm.loadbalancer.fast
 
 import cats._
-import cats.syntax.functor._
-import cats.syntax.flatMap._
 import cats.effect._
-import org.http4s._
-import org.http4s.dsl._
-import org.http4s.implicits._
+import cats.syntax.flatMap._
+import cats.syntax.functor._
 import com.comcast.ip4s._
-import org.http4s.server.Server
-import org.http4s.client.Client
-import org.http4s.ember.server.EmberServerBuilder
-import org.http4s.ember.client.EmberClientBuilder
-import pureconfig.ConfigSource
 import fs2.io.net.Network
+import org.http4s._
+import org.http4s.client.Client
+import org.http4s.dsl._
+import org.http4s.ember.client.EmberClientBuilder
+import org.http4s.ember.server.EmberServerBuilder
+import org.http4s.implicits._
+import org.http4s.server.Server
+import pureconfig.ConfigSource
 
 object LoadBalancer extends IOApp.Simple {
 

@@ -1,7 +1,7 @@
 package rockthejvm.loadbalancer.services
 
-import rockthejvm.loadbalancer.domain._
 import rockthejvm.loadbalancer.domain.UrlsRef.Backends
+import rockthejvm.loadbalancer.domain._
 import rockthejvm.loadbalancer.http.ServerHealthStatus
 
 trait UpdateBackendsAndGet {
