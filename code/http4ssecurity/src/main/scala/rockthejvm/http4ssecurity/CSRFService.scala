@@ -41,19 +41,19 @@ object CSRFService extends IOApp.Simple {
 
   val cookieName = "csrf-token"
 
-  def token[F[_]: Sync]: F[SecretKey] =
+  def fToken[F[_]: Sync]: F[SecretKey] =
     CSRF.generateSigningKey[F]()
 
   def csrfService[F[_]: Sync]: F[HttpApp[F]] =
-    token
-      .map { t =>
+    fToken
+      .map { token =>
         def defaultOriginCheck: Request[F] => Boolean =
           request =>
             CSRF
               .defaultOriginCheck[F](request, "localhost", Uri.Scheme.http, None)
 
         def csrfBuilder: CSRF.CSRFBuilder[F, F] =
-          CSRF[F, F](t, defaultOriginCheck)
+          CSRF[F, F](token, defaultOriginCheck)
 
         def csrf: CSRF[F, F] =
           csrfBuilder

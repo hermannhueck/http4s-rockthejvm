@@ -130,13 +130,14 @@ object Http4sDemo4AuthSessions extends IOApp.Simple {
         req.headers.get[Cookie]
 
       OptionT.liftF {
-        val response = maybeCookie.fold(Forbidden("No cookie found.")) { cookie =>
-          checkSessionCokkie(cookie).fold(Forbidden("Invalid cookie.")) { token =>
-            getUser(token.content).fold(Forbidden("Invalid token.")) { user =>
-              service.orNotFound.run(req.withPathInfo(modifyPath(user)))
+        val response: F[Response[F]] =
+          maybeCookie.fold(Forbidden("No cookie found")) { cookie =>
+            checkSessionCokkie(cookie).fold(Forbidden("Invalid cookie")) { token =>
+              getUser(token.content).fold(Forbidden("Invalid token")) { user =>
+                service.orNotFound.run(req.withPathInfo(modifyPath(user)))
+              }
             }
           }
-        }
         response
       }
     }

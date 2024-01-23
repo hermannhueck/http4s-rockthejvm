@@ -76,7 +76,7 @@ object Http4sDemo5AuthJWT extends IOApp.Simple {
   // using library: "dev.profunktor" %% "http4s-jwt-auth" % http4sJwtAuthVersion
 
   def jwtAuthMiddleware[F[_]: MonadThrow]: AuthMiddleware[F, User] =
-    JwtAuthMiddleware(JwtAuth.hmac(key, algorithm), authenticate)
+    JwtAuthMiddleware(JwtAuth.hmac(key, algorithm), authorize)
 
   def securedRoutes[F[_]: Monad]: AuthedRoutes[User, F] = {
 
@@ -122,14 +122,16 @@ object Http4sDemo5AuthJWT extends IOApp.Simple {
   val token     =
     JwtCirce.encode(claim("alice", "basic"), key, algorithm)
 
-  def authenticate[F[_]: MonadThrow]: JwtToken => JwtClaim => F[Option[User]] =
+  // using fold
+  def authorize[F[_]: MonadThrow]: JwtToken => JwtClaim => F[Option[User]] =
     (_: JwtToken) =>
       (claim: JwtClaim) =>
         decode[TokenPayload](claim.content)
           .fold(_ => none[User], payload => database.get(payload.username))
           .pure[F]
 
-  def authenticateUnused[F[_]: MonadThrow]: JwtToken => JwtClaim => F[Option[User]] =
+  // using pattern matching
+  def authorizeUnused[F[_]: MonadThrow]: JwtToken => JwtClaim => F[Option[User]] =
     (_: JwtToken) =>
       (claim: JwtClaim) =>
         decode[TokenPayload](claim.content) match {

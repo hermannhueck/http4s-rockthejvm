@@ -115,13 +115,15 @@ object OAuthWithHttp4s extends IOApp.Simple {
   import org.typelevel.log4cats.slf4j.Slf4jFactory
   implicit val logging: LoggerFactory[IO] = Slf4jFactory.create[IO]
 
-  val appConfig: ConfigValue[Effect, AppConfig]       =
+  val appConfig: ConfigValue[Effect, AppConfig] =
     file(Paths.get("src/main/resources/appConfig.json"))
       .as[AppConfig]
+
   val serverConfig: ConfigValue[Effect, ServerConfig] =
     file(Paths.get("src/main/resources/serverConfig.json"))
       .as[ServerConfig]
-  val config: ConfigValue[Effect, Config]             =
+
+  val config: ConfigValue[Effect, Config] =
     (appConfig, serverConfig).parMapN(Config)
 
   @annotation.nowarn("cat=unused-params")
@@ -132,34 +134,36 @@ object OAuthWithHttp4s extends IOApp.Simple {
 
   def getJsonString[F[_]: Async: Network: LoggerFactory](request: Request[F]): F[String] =
     emberClientResource[F]
-      .use { _.expect[String](request) }
+      .use(_.expect[String](request))
 
   def fetchAccessToken[F[_]: Async: Network: LoggerFactory](code: String, config: AppConfig): F[Option[String]] = {
 
     // access https://github.com/login/oauth/access_token using a POST request
-    val form    = UrlForm(
+    val form = UrlForm(
       "client_id"     -> config.key,
       "client_secret" -> config.secret.value,
       "code"          -> code
     )
-    val request = Request[F](
+
+    val request = Request[F]( // POST request to Github's authorization server to retrieve the access token
       method = Method.POST,
       uri = uri"https://github.com/login/oauth/access_token",
       headers = Headers(Accept(MediaType.application.json))
     ).withEntity(form)
 
     // 1. contact Github's authorization server with the authorization code (we need to be an HTTP client)
-    // 2. Github will respond with a json String containing the access token
+    // 2. Github will respond with a json String containing the access token, token type and scope
     // 3. we need to decode the access token from the json String
-    getJsonString(request)
+    getJsonString(request) // : F[String]
       .map { jsonString =>
-        decode[GithubTokenResponse](jsonString)
-          .toOption
-          .map(_.access_token)
-      }
+        decode[GithubTokenResponse](jsonString) // : Either[Error, GithubTokenResponse]
+          .toOption                             // : Option[GithubTokenResponse]
+          .map(_.access_token) // : Option[String]
+      }                    // : F[Option[String]]
   }
 
   def fetchUserInfo[F[_]: Async: Network: LoggerFactory](token: String): F[Option[String]] = {
+
     // access https://api.github.com/user using a GET request
     val request = Request[F](
       method = Method.GET,
@@ -191,7 +195,9 @@ object OAuthWithHttp4s extends IOApp.Simple {
     (for {
       token <- OptionT(fetchAccessToken(code, config))
       user  <- OptionT(fetchUserInfo(token))
-    } yield s"User \n\n$user\n\nsuccesfully logged in").value.map(_.getOrElse("Authentication failed"))
+    } yield s"User \n\n$user\n\nsuccesfully logged in") // : OptionT[F, String]
+      .value                                     // : F[Option[String]]
+      .map(_.getOrElse("Authentication failed")) // : F[String]
 
   def routes[F[_]: Async: Files: Network: LoggerFactory](config: AppConfig): HttpRoutes[F] = {
 
@@ -208,7 +214,8 @@ object OAuthWithHttp4s extends IOApp.Simple {
 
       // /callback?code=...
       case GET -> Root / "callback" :? GithubTokenQueryParamMatcher(code) =>
-        getOAuthResult(code, config).flatMap(result => Ok(result))
+        getOAuthResult(code, config)
+          .flatMap(result => Ok(result))
     }
   }
 
@@ -220,11 +227,10 @@ object OAuthWithHttp4s extends IOApp.Simple {
       .withHttpApp(routes(config.appConfig).orNotFound)
       .build
 
-  val run: IO[Unit] = {
+  val run: IO[Unit] =
     config
       .load[IO]
       .flatMap { config =>
         server[IO](config).useForever
       }
-  }
 }
